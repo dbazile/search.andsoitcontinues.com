@@ -1,6 +1,7 @@
 import logging
 import time
 
+import aiohttp_cors
 from aiohttp.web import Application, Request, json_response
 
 from asic_search import blog, portfolio, github
@@ -9,19 +10,26 @@ from asic_search import blog, portfolio, github
 _timer = None  # type: Timer
 
 
-def init(server_: Application):
+def init(app: Application):
     global _timer
     _timer = Timer()
 
     log = logging.getLogger(__name__)
     github.pull()
 
+    log.info('Configure CORS')
+    cors = aiohttp_cors.setup(app, defaults={
+        '*': {
+            'max_age': 86400,
+        },
+    })
+
     log.info('Attaching routes')
-    server_.router.add_get('/', health_check)
-    server_.router.add_get('/blog', search_blog)
-    server_.router.add_get('/combined', search_combined)
-    server_.router.add_get('/portfolio', search_portfolio)
-    server_.router.add_get('/touch', touch)
+    cors.add(app.router.add_get('/', health_check))
+    cors.add(app.router.add_get('/blog', search_blog))
+    cors.add(app.router.add_get('/combined', search_combined))
+    cors.add(app.router.add_get('/portfolio', search_portfolio))
+    cors.add(app.router.add_get('/touch', touch))
 
     log.info('Ready for requests')
 
