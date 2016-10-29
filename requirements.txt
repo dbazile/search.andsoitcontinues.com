@@ -1,0 +1,10 @@
+aiohttp==1.0.5
+async-timeout==1.1.0
+chardet==2.3.0
+gitdb2==2.0.0
+GitPython==2.1.0
+gunicorn==19.6.0
+Markdown==2.6.7
+multidict==2.1.2
+requests==2.11.1
+smmap2==2.0.1
