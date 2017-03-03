@@ -6,8 +6,9 @@ if [ "$PORT" == "" ]; then
   PORT=5000
 fi
 
-REPO_URL="file:///Users/david/Code/dbazile.github.io" \
+. .env/bin/activate
+
+export REPO_URL="file:///Users/david/code/andsoitcontinues.com"
 gunicorn asic_search.server:server \
-  --bind 0.0.0.0:$PORT \
-  --reload \
-  --worker-class aiohttp.worker.GunicornWebWorker \
+  --bind localhost:$PORT \
+  --reload
