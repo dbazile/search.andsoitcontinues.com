@@ -1,24 +1,6 @@
-import logging.config
+import logging
 
-logging.config.dictConfig({
-    'version': 1,
-    'formatters': {
-        'standard': {
-            'format': '%(levelname)-5s - %(name)s:%(funcName)s -- %(message)s',
-        }
-    },
-    'handlers': {
-        'standard': {
-            'class': 'logging.StreamHandler',
-            'formatter': 'standard',
-            'stream': 'ext://sys.stdout',
-        },
-    },
-    'loggers': {
-        __name__: {
-            'handlers': ['standard'],
-            'level': 'INFO',
-        },
-    },
-    'disable_existing_loggers': False,
-})
+logging.basicConfig(
+    format='%(name)s:%(funcName)s - %(levelname)-5s - %(message)s',
+    level=logging.INFO,
+)

@@ -2,3 +2,4 @@
 latest
 __pycache__
 *.pyc
+.idea
