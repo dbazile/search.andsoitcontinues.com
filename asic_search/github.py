@@ -6,7 +6,7 @@ import git
 
 CACHE_TTL = 300
 REPO_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'latest')
-REPO_URL = os.getenv('REPO_URL', 'https://github.com/dbazile/dbazile.github.io')
+REPO_URL = os.getenv('REPO_URL', 'https://github.com/dbazile/andsoitcontinues.com')
 
 _time_of_last_pull = -1
 
