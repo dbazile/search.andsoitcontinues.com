@@ -62,7 +62,7 @@ def _to_result(post: dict, filename: str) -> dict:
     result = {
         'type':        'blog',
         'subject':     post['subject'],
-        'description': post['abstract'],
+        'description': _to_plaintext(post['abstract']),
         'tags':        post['tags'],
         'uri':         _to_uri(filename),
         'blog:date':   post['date'],
