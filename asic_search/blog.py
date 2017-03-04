@@ -44,7 +44,21 @@ def _deserialize_post(entry):
 
     raw_meta, raw_body = matches.groups()
 
-    parser = markdown.Markdown(extensions=['markdown.extensions.smarty'])
+    parser = markdown.Markdown(
+        extensions=[
+            'markdown.extensions.smarty',
+        ],
+        extension_configs={
+            'markdown.extensions.smarty': {
+                'substitutions': {
+                    'left-single-quote': '‘',
+                    'right-single-quote': '’',
+                    'left-double-quote': '“',
+                    'right-double-quote': '”',
+                },
+            },
+        },
+    )
 
     post = {k.lower(): v for k, v in yaml.load(raw_meta).items()}
     post['abstract'] = parser.convert(post.get('abstract', ''))
