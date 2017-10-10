@@ -1,10 +1,10 @@
-import os.path
+import os
 import re
 import xml.etree.ElementTree as et
 
-from asic_search.github import REPO_PATH
+from search.github import REPO_PATH
 
-BASE_URL = 'http://andsoitcontinues.com'
+BASE_URL = 'https://bazile.org'
 DTD_PREAMBLE = """\
 <!DOCTYPE portfolio-item [
 <!ENTITY quot    "&#34;">

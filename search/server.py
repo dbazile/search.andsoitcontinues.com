@@ -4,13 +4,14 @@ import time
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
-from asic_search import blog, portfolio, github
+from search import github
+from search.contexts import blog, portfolio
 
 
 _time_started = time.time()
 
-server = Flask(__name__)
-CORS(server, origins='*', max_age=86400)
+app = Flask(__name__)
+CORS(app, origins='*', max_age=86400)
 
 github.pull()
 
@@ -19,7 +20,7 @@ github.pull()
 # Routes
 #
 
-@server.route('/')
+@app.route('/')
 def health_check():
     return jsonify({
         'uptime': _get_duration(_time_started),
@@ -27,8 +28,8 @@ def health_check():
     })
 
 
-@server.route('/combined')
-def search_all():
+@app.route('/everywhere')
+def search_everywhere():
     start = time.time()
     github.pull_if_needed()
     query, tags_only = _get_criteria()
@@ -41,7 +42,7 @@ def search_all():
     })
 
 
-@server.route('/blog')
+@app.route('/blog')
 def search_blog():
     start = time.time()
     github.pull_if_needed()
@@ -52,7 +53,7 @@ def search_blog():
     })
 
 
-@server.route('/portfolio')
+@app.route('/portfolio')
 def search_portfolio():
     start = time.time()
     github.pull_if_needed()
@@ -63,7 +64,7 @@ def search_portfolio():
     })
 
 
-@server.route('/touch')
+@app.route('/touch')
 def touch():
     start = time.time()
     logging.getLogger(__name__).info('Forcing git pull now')

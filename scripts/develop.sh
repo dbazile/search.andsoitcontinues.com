@@ -3,13 +3,13 @@
 cd $(dirname $(dirname $0))  # Return to project root
 
 if [ "$PORT" == "" ]; then
-  PORT=5000
+	PORT=5000
 fi
 
-. .env/bin/activate
+. venv/bin/activate
 
-export REPO_URL="file:///Users/david/code/andsoitcontinues.com"
+export REPO_URL=~/code/bazile.org
 
-gunicorn asic_search.server:server \
-  --bind localhost:$PORT \
-  --reload
+gunicorn search.server:app \
+	--bind localhost:$PORT \
+	--reload

@@ -1,5 +1,5 @@
-.env
-andsoitcontinues.com.git
+venv
+.cloned-repository
 __pycache__
 *.pyc
 .idea

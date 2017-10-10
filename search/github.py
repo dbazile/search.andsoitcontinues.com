@@ -1,12 +1,13 @@
 import logging
-import os.path
+import os
 import time
 
 import git
 
+
 CACHE_TTL = 300
-REPO_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'andsoitcontinues.com.git')
-REPO_URL = os.getenv('REPO_URL', 'https://github.com/dbazile/andsoitcontinues.com')
+REPO_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), '.cloned-repository')
+REPO_URL = os.getenv('REPO_URL', 'https://github.com/dbazile/bazile.org')
 
 _time_of_last_pull = -1
 
@@ -33,5 +34,5 @@ def pull_if_needed():
     pull()
 
 
-def get_commit():
+def get_commit() -> str:
     return str(git.Repo(REPO_PATH).head.commit)

@@ -4,9 +4,10 @@ import re
 import markdown
 import yaml
 
-from asic_search.github import REPO_PATH
+from search.github import REPO_PATH
 
-BASE_URL = 'https://andsoitcontinues.com'
+
+BASE_URL = 'https://bazile.org'
 PATTERN_MARKDOWN = re.compile("""^---\n(?P<meta>.*)\n---\n\n?(?P<content>.*)$""",
                               re.MULTILINE | re.DOTALL)
 
