@@ -79,19 +79,20 @@ def _to_result(post: dict, filename: str) -> dict:
         'subject':     post['subject'],
         'description': _to_plaintext(post['abstract']),
         'tags':        post['tags'],
-        'uri':         _to_uri(filename),
+        'uri':         _to_uri(post['date'], filename),
         'blog:date':   post['date'],
         'blog:type':   post['type'],
     }
 
     if result['blog:type'] in ('link', 'image'):
-        result['blog:url'] = re.sub(r'^\.\.', BASE_URL, post['url'])
+        result['blog:url'] = re.sub(r'^(\.\.|/)', BASE_URL, post['url'])
 
     return result
 
 
-def _to_uri(s):
-    return '{}/writing/{}.html'.format(
+def _to_uri(date, filename):
+    return '{}/writing/{}/{}.html'.format(
         BASE_URL,
-        re.sub(r'\W+', '_', re.sub('\.md$', '', s)),
+        date.year,
+        re.sub(r'\W+', '_', re.sub('\.md$', '', filename)),
     )
