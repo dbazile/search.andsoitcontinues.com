@@ -11,4 +11,4 @@ MarkupSafe==1.0
 PyYAML==5.1
 six==1.11.0
 smmap2==2.0.3
-Werkzeug==0.12.2
+Werkzeug==0.15.3
