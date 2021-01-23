@@ -1,13 +1,12 @@
 library 'deployment'
 
-pipeline {
-    agent any
+node {
+    stage ('Prepare') {
+        deleteDir()
+        checkout scm
+    }
 
-    stages {
-        stage('Deploy') {
-            steps {
-                deployApplication('search')
-            }
-        }
+    stage('Deploy') {
+        deployApplication('search')
     }
 }
