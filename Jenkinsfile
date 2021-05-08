@@ -1,4 +1,4 @@
-library 'deployment'
+library 'libcommon'
 
 node {
     stage ('Prepare') {
@@ -7,6 +7,6 @@ node {
     }
 
     stage('Deploy') {
-        deployApplication('search')
+        libcommon.deploy('search')
     }
 }
