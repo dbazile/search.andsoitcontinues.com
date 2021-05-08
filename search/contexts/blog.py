@@ -61,7 +61,7 @@ def _deserialize_post(entry):
         },
     )
 
-    post = {k.lower(): v for k, v in yaml.load(raw_meta).items()}
+    post = {k.lower(): v for k, v in yaml.safe_load(raw_meta).items()}
     post['abstract'] = parser.convert(post.get('abstract', ''))
     post['body'] = parser.convert(raw_body)
     post.setdefault('type', 'text')
